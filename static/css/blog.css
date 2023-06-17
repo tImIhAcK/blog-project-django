@@ -31,3 +31,30 @@ body {
   padding: 15px;
   background-color: #f1f1f1;
 }
+
+/* PAGINATION */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.step-links {
+  display: flex;
+  align-items: center;
+}
+
+.step-links a {
+  margin: 0 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #333;
+}
+
+.current {
+  margin: 0 10px;
+}
