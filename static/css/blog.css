@@ -1,0 +1,33 @@
+html{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+}
+
+.content {
+  flex: 2;
+  padding: 15px;
+}
+
+.content .date{
+    font-size: 3px;
+    font-style: italic;
+    font-weight: bold;
+    color:#c0c0c0
+}
+
+.sidebar {
+  flex: 1;
+  padding: 15px;
+  background-color: #f1f1f1;
+}
