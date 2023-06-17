@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
-from .forms import EmailPostForm
+from .models import Post, Comment
+from .forms import EmailPostForm, CommentForm
 from django.views import generic
 from django.core.mail import send_mail
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 class PostListView(generic.ListView):
@@ -18,8 +19,10 @@ def post_detail(request, year, month, day, post):
                             publish__year=year,
                             publish__month=month,
                             publish__day=day)
+    comments = post.comments.filter(active=True)
+    form = CommentForm()
     
-    return render(request, 'blog/post_detail.html', {'post': post})
+    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments, 'form': form})
 
 
 def post_share(request, post_id):
@@ -41,5 +44,18 @@ def post_share(request, post_id):
             
     else:
         form = EmailPostForm()
-    return render(request, 'blog/post_share.html', {'form': form, 'post':post})
+    return render(request, 'blog/post_share.html', {'form': form, 'post':post, 'sent': sent})
 
+
+@require_POST
+def post_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
+    comment = None
+    
+    form = CommentForm(data=request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.save()
+        
+    return render(request, 'blog/post_comment.html', {'form': form, 'comment': comment, 'post': post})
