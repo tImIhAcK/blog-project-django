@@ -1,4 +1,5 @@
 # blog-project-django
 
 ## Still in development
-## Done with the post system, working on the comment system
+## Done with the post system and the comment system
+## working on adding more functionalities
